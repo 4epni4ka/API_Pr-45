@@ -9,6 +9,7 @@ namespace API_Леготкин.Controllers
 {
 
     [Route("api/TasksController")]
+    [ApiExplorerSettings(GroupName = "v1")]
 
     public class TasksController : Controller
     {
