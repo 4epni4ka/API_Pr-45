@@ -4,10 +4,10 @@ using System;
 
 namespace API_Леготкин.Context
 {
-    public class TaskContext:DbContext
+    public class TasksContext:DbContext
     {
-        public DbSet<Task> Tasks { get; set; }
-        public TaskContext()
+        public DbSet<Tasks> Tasks { get; set; }
+        public TasksContext()
         {
             Database.EnsureCreated();
             Tasks.Load();
