@@ -8,7 +8,7 @@ using System.Linq;
 namespace API_Леготкин.Controllers
 {
 
-    [Route("арі/TasksController")]
+    [Route("api/TasksController")]
 
     public class TasksController : Controller
     {

@@ -27,7 +27,15 @@ namespace API_Леготкин
 
                     Description = "Полное руководство для использования запросов находящихся в проекте"
                 });
-                var filePath = Path.Combine(System.AppContext.BaseDirectory, "ASP_GET.xml");
+                c.SwaggerDoc("v2", new OpenApiInfo
+                {
+                    Version = "v2",
+
+                    Title = "Руководство для использования запросов",
+
+                    Description = "Полное руководство для использования запросов находящихся в проекте"
+                });
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "API_Леготкин.xml");
                 c.IncludeXmlComments(filePath);
             });
         }
@@ -41,6 +49,7 @@ namespace API_Леготкин
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Запросы GET");
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "Запросы POST");
             });
         }
     }
