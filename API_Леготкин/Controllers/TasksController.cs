@@ -72,5 +72,42 @@ namespace API_Леготкин.Controllers
                 return StatusCode(500);
             }
         }
+
+        /// <summary>
+        /// Метод изменения задачи
+        /// </summary>
+        /// <param name="task">Данные о задачи</param>
+        /// <returns>Статус выполнения запроса</returns>
+        /// <remarks>Данный метод добавляет задачу в базу данных</remarks>
+        [Route("Edit")]
+        [HttpPut]
+        [ApiExplorerSettings(GroupName = "v3")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public ActionResult Edit([FromForm] Tasks task)
+        {
+            try
+            {
+                TasksContext tasksContext = new TasksContext();
+                var editTask = tasksContext.Tasks.SingleOrDefault(x => x.Id == task.Id);
+                if (editTask != null)
+                {
+                    editTask.Name = task.Name;
+                    editTask.Priority = task.Priority;
+                    editTask.DateExecute = task.DateExecute;
+                    editTask.Comment = task.Comment;
+                    editTask.Done = task.Done;
+                    tasksContext.SaveChanges();
+                    return StatusCode(200);
+                }
+                else
+                    return StatusCode(400);
+            }
+            catch (Exception exp)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
