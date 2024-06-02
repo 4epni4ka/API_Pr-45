@@ -109,5 +109,55 @@ namespace API_Леготкин.Controllers
                 return StatusCode(500);
             }
         }
+        [Route("DeleteItem")]
+        [HttpDelete]
+        [ApiExplorerSettings(GroupName = "v4")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public ActionResult DeleteItem(int Id)
+        {
+            try
+            {
+                TasksContext tasksContext = new TasksContext();
+                var editTask = tasksContext.Tasks.SingleOrDefault(x => x.Id == Id);
+                if (editTask != null)
+                {
+                    tasksContext.Tasks.Remove(editTask);
+                    tasksContext.SaveChanges();
+                    return StatusCode(200);
+                }
+                else
+                    return StatusCode(400);
+            }
+            catch (Exception exp)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [Route("DeleteAllItems")]
+        [HttpDelete]
+        [ApiExplorerSettings(GroupName = "v4")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public ActionResult DeleteAllItems()
+        {
+            try
+            {
+                TasksContext tasksContext = new TasksContext();
+                foreach (var task in tasksContext.Tasks)
+                {
+                    tasksContext.Remove(task);
+                }
+                tasksContext.SaveChanges();
+                return StatusCode(200);
+            }
+            catch (Exception exp)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
