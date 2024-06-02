@@ -7,18 +7,18 @@ using System.Linq;
 
 namespace API_Леготкин.Controllers
 {
-    [Route("api/TasksController")]
-    [ApiExplorerSettings(GroupName = "v1")]
+    [Route("api/UsersController")]
+    [ApiExplorerSettings(GroupName = "v2")]
     public class UsersController:Controller
     {
         [Route("SingIn")]
-        [HttpGet]
+        [HttpPost]
         [ProducesResponseType(typeof(Users), 200)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         public ActionResult SingIn([FromForm] string Login, [FromForm] string Password)
         {
-            if (Login != null || Password == null)
+            if (Login == null || Password == null)
                 return StatusCode(403);
             try
             {
